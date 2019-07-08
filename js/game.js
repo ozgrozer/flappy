@@ -14,6 +14,7 @@ class Game {
 
     this.frameCount = 1
     this.givePoint = false
+    this.score = 0
 
     this.velocity = 0
     this.gravity = 0.5
@@ -230,6 +231,7 @@ class Game {
         )
       ) {
         this.givePoint = true
+        this.score++
         this.playSound({ audio: 'point' })
       }
     }
@@ -245,7 +247,22 @@ class Game {
     }
   }
 
+  showScore () {
+    const text = this.score
+    const x = 20
+    const y = 50
+
+    this.ctx.font = '40px Verdana'
+    this.ctx.strokeStyle = '#000000'
+    this.ctx.lineWidth = 7
+    this.ctx.strokeText(text, x, y)
+    this.ctx.fillStyle = '#ffffff'
+    this.ctx.fillText(text, x, y)
+  }
+
   startGame () {
+    this.givePoint = false
+    this.score = 0
     this.frameCount = 1
     this.pipes = []
     this.birdPosition = {
@@ -262,6 +279,8 @@ class Game {
     this.fallingBird()
     this.birdHitsPipe()
     this.birdPassesPipe()
+
+    this.showScore()
 
     this.frameCount++
     window.requestAnimationFrame(this.render.bind(this))
