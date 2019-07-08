@@ -37,12 +37,28 @@ class Game {
 
     this.birdJumpEvent()
     this.startGame()
+    this.preloadSounds()
   }
 
   clearCanvas () {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
     this.ctx.fillStyle = '#70c4cd'
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
+  }
+
+  preloadSounds () {
+    new window.Howl({
+      preload: true,
+      src: ['./sfx/hit.wav']
+    })
+    new window.Howl({
+      preload: true,
+      src: ['./sfx/point.wav']
+    })
+    new window.Howl({
+      preload: true,
+      src: ['./sfx/wing.wav']
+    })
   }
 
   playSound (props) {
