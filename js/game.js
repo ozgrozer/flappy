@@ -81,7 +81,7 @@ class Game {
       src: ['./sfx/' + props.audio + '.wav']
     })
 
-    /* sound.play() */
+    sound.play()
   }
 
   birdJump () {
