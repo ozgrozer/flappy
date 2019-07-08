@@ -159,42 +159,39 @@ class Game {
   getFirstPipePosition () {
     const firstPipe = this.pipes[0]
 
-    if (firstPipe) {
-      const firstPipeXBeginning = firstPipe.x - this.pipeConfig.border
-      const firstPipeXEnd = firstPipeXBeginning + this.pipeConfig.width + this.pipeConfig.border
-      const firstPipeTopPipeYEnd = firstPipe.topHeight + this.pipeConfig.border
-      const firstPipeBottomPipeYBeginning = this.canvas.height - firstPipe.bottomHeight + this.pipeConfig.border
+    const firstPipeXBeginning = firstPipe.x - this.pipeConfig.border
+    const firstPipeXEnd = firstPipeXBeginning + this.pipeConfig.width + this.pipeConfig.border
+    const firstPipeTopPipeYEnd = firstPipe.topHeight + this.pipeConfig.border
+    const firstPipeBottomPipeYBeginning = this.canvas.height - firstPipe.bottomHeight + this.pipeConfig.border
 
-      return {
-        firstPipeXBeginning: firstPipeXBeginning,
-        firstPipeXEnd: firstPipeXEnd,
-        firstPipeTopPipeYEnd: firstPipeTopPipeYEnd,
-        firstPipeBottomPipeYBeginning: firstPipeBottomPipeYBeginning
-      }
+    return {
+      firstPipeXBeginning: firstPipeXBeginning,
+      firstPipeXEnd: firstPipeXEnd,
+      firstPipeTopPipeYEnd: firstPipeTopPipeYEnd,
+      firstPipeBottomPipeYBeginning: firstPipeBottomPipeYBeginning
     }
   }
 
   birdHitsPipe () {
-    const firstPipe = this.pipes[0]
+    const getBirdPosition = this.getBirdPosition()
+    const getFirstPipePosition = this.getFirstPipePosition()
 
-    if (firstPipe) {
-      const getBirdPosition = this.getBirdPosition()
-      const getFirstPipePosition = this.getFirstPipePosition()
-
-      if (
-        (
-          getBirdPosition.birdPositionXEnd > getFirstPipePosition.firstPipeXBeginning &&
-          getBirdPosition.birdPositionXBeginning < getFirstPipePosition.firstPipeXEnd
-        ) &&
-        (
-          getBirdPosition.birdPositionYBeginning < getFirstPipePosition.firstPipeTopPipeYEnd ||
-          getBirdPosition.birdPositionYEnd > getFirstPipePosition.firstPipeBottomPipeYBeginning
-        )
-      ) {
-        this.playSound({ audio: 'hit' })
-        this.startGame()
-      }
+    if (
+      (
+        getBirdPosition.birdPositionXEnd > getFirstPipePosition.firstPipeXBeginning &&
+        getBirdPosition.birdPositionXBeginning < getFirstPipePosition.firstPipeXEnd
+      ) &&
+      (
+        getBirdPosition.birdPositionYBeginning < getFirstPipePosition.firstPipeTopPipeYEnd ||
+        getBirdPosition.birdPositionYEnd > getFirstPipePosition.firstPipeBottomPipeYBeginning
+      )
+    ) {
+      this.playSound({ audio: 'hit' })
+      this.startGame()
     }
+  }
+
+  birdPassesPipe () {
   }
 
   comingPipes () {
@@ -219,8 +216,14 @@ class Game {
   render () {
     this.clearCanvas()
     this.fallingBird()
-    this.birdHitsPipe()
     this.comingPipes()
+
+    const firstPipe = this.pipes[0]
+    if (firstPipe) {
+      this.birdHitsPipe()
+      this.birdPassesPipe()
+    }
+
     this.frameCount++
     window.requestAnimationFrame(this.render.bind(this))
   }
