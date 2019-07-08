@@ -142,28 +142,53 @@ class Game {
     }
   }
 
-  birdHitsPipe () {
+  getBirdPosition () {
+    const birdPositionXBeginning = this.birdPosition.x - this.birdConfig.border
+    const birdPositionXEnd = birdPositionXBeginning + this.birdConfig.width + this.birdConfig.border
+    const birdPositionYBeginning = this.birdPosition.y - this.birdConfig.border
+    const birdPositionYEnd = birdPositionYBeginning + this.birdConfig.height + this.birdConfig.border
+
+    return {
+      birdPositionXBeginning: birdPositionXBeginning,
+      birdPositionXEnd: birdPositionXEnd,
+      birdPositionYBeginning: birdPositionYBeginning,
+      birdPositionYEnd: birdPositionYEnd
+    }
+  }
+
+  getFirstPipePosition () {
     const firstPipe = this.pipes[0]
 
     if (firstPipe) {
-      const birdPositionXBeginning = this.birdPosition.x - this.birdConfig.border
-      const birdPositionXEnd = birdPositionXBeginning + this.birdConfig.width + this.birdConfig.border
-      const birdPositionYBeginning = this.birdPosition.y - this.birdConfig.border
-      const birdPositionYEnd = birdPositionYBeginning + this.birdConfig.height + this.birdConfig.border
-
       const firstPipeXBeginning = firstPipe.x - this.pipeConfig.border
       const firstPipeXEnd = firstPipeXBeginning + this.pipeConfig.width + this.pipeConfig.border
       const firstPipeTopPipeYEnd = firstPipe.topHeight + this.pipeConfig.border
       const firstPipeBottomPipeYBeginning = this.canvas.height - firstPipe.bottomHeight + this.pipeConfig.border
 
+      return {
+        firstPipeXBeginning: firstPipeXBeginning,
+        firstPipeXEnd: firstPipeXEnd,
+        firstPipeTopPipeYEnd: firstPipeTopPipeYEnd,
+        firstPipeBottomPipeYBeginning: firstPipeBottomPipeYBeginning
+      }
+    }
+  }
+
+  birdHitsPipe () {
+    const firstPipe = this.pipes[0]
+
+    if (firstPipe) {
+      const getBirdPosition = this.getBirdPosition()
+      const getFirstPipePosition = this.getFirstPipePosition()
+
       if (
         (
-          birdPositionXEnd > firstPipeXBeginning &&
-          birdPositionXBeginning < firstPipeXEnd
+          getBirdPosition.birdPositionXEnd > getFirstPipePosition.firstPipeXBeginning &&
+          getBirdPosition.birdPositionXBeginning < getFirstPipePosition.firstPipeXEnd
         ) &&
         (
-          birdPositionYBeginning < firstPipeTopPipeYEnd ||
-          birdPositionYEnd > firstPipeBottomPipeYBeginning
+          getBirdPosition.birdPositionYBeginning < getFirstPipePosition.firstPipeTopPipeYEnd ||
+          getBirdPosition.birdPositionYEnd > getFirstPipePosition.firstPipeBottomPipeYBeginning
         )
       ) {
         this.playSound({ audio: 'hit' })
