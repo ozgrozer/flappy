@@ -29,6 +29,7 @@ class Game {
       border: 5,
       speed: 3,
       gap: 100,
+      minHeight: 60,
       newPipeAtFrame: 70
     }
     this.pipes = []
@@ -105,9 +106,8 @@ class Game {
   }
 
   generatePipe () {
-    const minPipeHeight = 40
-    const minNumber = minPipeHeight
-    const maxNumber = this.canvas.height - this.pipeConfig.gap - minPipeHeight
+    const minNumber = this.pipeConfig.minHeight
+    const maxNumber = this.canvas.height - this.pipeConfig.gap - this.pipeConfig.minHeight
     const topHeight = this.randomInt(minNumber, maxNumber)
     const bottomHeight = this.canvas.height - topHeight - this.pipeConfig.gap
 
