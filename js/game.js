@@ -273,7 +273,9 @@ class Game {
       x: 50,
       y: 100
     }
-    this.playSound({ audio: 'swooshing' })
+    setTimeout(() => {
+      this.playSound({ audio: 'swooshing' })
+    }, 100)
   }
 
   render () {
