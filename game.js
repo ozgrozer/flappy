@@ -28,7 +28,7 @@ class Game {
       width: 50,
       border: 5,
       speed: 3,
-      gap: 150,
+      gap: 100,
       newPipeAtFrame: 70
     }
     this.pipes = []
