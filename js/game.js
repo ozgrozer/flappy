@@ -58,6 +58,10 @@ class Game {
     })
     new window.Howl({
       preload: true,
+      src: ['./sfx/swooshing.wav']
+    })
+    new window.Howl({
+      preload: true,
       src: ['./sfx/wing.wav']
     })
   }
@@ -269,6 +273,7 @@ class Game {
       x: 50,
       y: 100
     }
+    this.playSound({ audio: 'swooshing' })
   }
 
   render () {
