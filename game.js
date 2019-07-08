@@ -2,8 +2,15 @@ class Game {
   constructor () {
     this.canvas = document.getElementById('game')
     this.ctx = this.canvas.getContext('2d')
-    this.canvas.width = 320
-    this.canvas.height = 480
+
+    let canvasWidth = window.innerWidth
+    let canvasHeight = window.innerHeight
+    if (canvasWidth >= 500) {
+      canvasWidth = 320
+      canvasHeight = 480
+    }
+    this.canvas.width = canvasWidth
+    this.canvas.height = canvasHeight
 
     this.frameCount = 1
 
