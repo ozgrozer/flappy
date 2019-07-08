@@ -1,16 +1,37 @@
-html, body {
+html, body, #gameWrapper {
   margin: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color: #fff;
 }
 
-#game {
-  top: 0;
+@media (max-width: 600px) {
+  #gameWrapper {
+    width: 100%;
+  }
+}
+@media (min-width: 601px) {
+  #gameWrapper {
+    top: 50%;
+    left: 50%;
+    width: 320px;
+    height: 480px;
+    position: absolute;
+    margin-top: -240px;
+    margin-left: -160px;
+  }
+}
+
+#score {
   left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
+  top: 20px;
+  width: 100%;
+  color: #fff;
+  font-size: 50px;
+  user-select: none;
+  font-weight: bold;
   position: absolute;
+  text-align: center;
+  font-family: Verdana;
+  text-shadow: 4px 0 0 #000, -4px 0 0 #000, 0 4px 0 #000, 0 -4px 0 #000, 3px 3px #000, -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000;
 }

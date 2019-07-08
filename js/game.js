@@ -3,15 +3,6 @@ class Game {
     this.canvas = document.getElementById('game')
     this.ctx = this.canvas.getContext('2d')
 
-    let canvasWidth = window.innerWidth
-    let canvasHeight = window.innerHeight
-    if (canvasWidth >= 500) {
-      canvasWidth = 320
-      canvasHeight = 480
-    }
-    this.canvas.width = canvasWidth
-    this.canvas.height = canvasHeight
-
     this.frameCount = 1
     this.givePoint = false
     this.score = 0
@@ -36,9 +27,28 @@ class Game {
     }
     this.pipes = []
 
-    this.birdJumpEvent()
-    this.startGame()
     this.preloadSounds()
+    this.startGame()
+    this.birdJumpEvent()
+
+    this.initializeCanvasSize()
+  }
+
+  initializeCanvasSize () {
+    this.canvasSize()
+    window.onresize = () => {
+      this.canvasSize()
+    }
+  }
+  canvasSize () {
+    let canvasWidth = window.innerWidth
+    let canvasHeight = window.innerHeight
+    if (canvasWidth >= 600) {
+      canvasWidth = 320
+      canvasHeight = 480
+    }
+    this.canvas.width = canvasWidth
+    this.canvas.height = canvasHeight
   }
 
   clearCanvas () {
@@ -71,7 +81,7 @@ class Game {
       src: ['./sfx/' + props.audio + '.wav']
     })
 
-    sound.play()
+    /* sound.play() */
   }
 
   birdJump () {
@@ -252,16 +262,7 @@ class Game {
   }
 
   showScore () {
-    const text = this.score
-    const x = 20
-    const y = 50
-
-    this.ctx.font = '40px Verdana'
-    this.ctx.strokeStyle = '#000000'
-    this.ctx.lineWidth = 7
-    this.ctx.strokeText(text, x, y)
-    this.ctx.fillStyle = '#ffffff'
-    this.ctx.fillText(text, x, y)
+    document.getElementById('score').innerHTML = this.score
   }
 
   startGame () {
