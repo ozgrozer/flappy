@@ -44,15 +44,25 @@ class Game {
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
   }
 
+  playSound (props) {
+    const audio = document.getElementById('sfx-' + props.audio)
+    audio.currentTime = 0
+    audio.play()
+  }
+
+  birdJump () {
+    this.velocity = -this.lift
+    this.playSound({ audio: 'wing' })
+  }
   birdJumpEvent () {
     document.body.onkeydown = (e) => {
       if (e.keyCode === 32) {
-        this.velocity = -this.lift
+        this.birdJump()
       }
     }
 
     document.body.ontouchstart = (e) => {
-      this.velocity = -this.lift
+      this.birdJump()
     }
   }
 
@@ -154,6 +164,7 @@ class Game {
           birdPositionYEnd > firstPipeBottomPipeYBeginning
         )
       ) {
+        this.playSound({ audio: 'hit' })
         this.startGame()
       }
     }
