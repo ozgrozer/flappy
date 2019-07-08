@@ -175,8 +175,6 @@ class Game {
   comingPipes () {
     this.newPipe()
 
-    this.birdHitsPipe()
-
     for (let i = this.pipes.length - 1; i >= 0; i--) {
       const pipe = this.pipes[i]
       this.drawPipe(pipe)
@@ -196,6 +194,7 @@ class Game {
   render () {
     this.clearCanvas()
     this.fallingBird()
+    this.birdHitsPipe()
     this.comingPipes()
     this.frameCount++
     window.requestAnimationFrame(this.render.bind(this))
