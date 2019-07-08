@@ -1,3 +1,3 @@
 # flappy
 
-[https://ozgrozer.github.io/flappy/](Demo)
+[Demo](https://ozgrozer.github.io/flappy/)
