@@ -6,6 +6,7 @@ class Game {
     this.frameCount = 1
     this.givePoint = false
     this.score = 0
+    this.topScore = 0
 
     this.velocity = 0
     this.gravity = 0.5
@@ -207,6 +208,21 @@ class Game {
     }
   }
 
+  getTopScore () {
+    return window.Cookies.get('topScore')
+      ? parseInt(window.Cookies.get('topScore'))
+      : 0
+  }
+
+  gameOver () {
+    const getTopScore = this.getTopScore()
+    if (this.score > getTopScore) {
+      window.Cookies.set('topScore', this.score)
+    }
+    this.playSound({ audio: 'hit' })
+    this.startGame()
+  }
+
   birdHitsPipe () {
     const firstPipe = this.pipes[0]
 
@@ -224,8 +240,7 @@ class Game {
           getBirdPosition.birdPositionYEnd > getFirstPipePosition.firstPipeBottomPipeYBeginning
         )
       ) {
-        this.playSound({ audio: 'hit' })
-        this.startGame()
+        this.gameOver()
       }
     }
   }
@@ -265,6 +280,10 @@ class Game {
     document.getElementById('score').innerHTML = this.score
   }
 
+  updateTopScore () {
+    document.getElementById('topScore').innerHTML = this.getTopScore()
+  }
+
   startGame () {
     this.givePoint = false
     this.score = 0
@@ -277,6 +296,8 @@ class Game {
     setTimeout(() => {
       this.playSound({ audio: 'swooshing' })
     }, 100)
+
+    this.updateTopScore()
   }
 
   render () {
