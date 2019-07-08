@@ -45,9 +45,11 @@ class Game {
   }
 
   playSound (props) {
-    const audio = document.getElementById('sfx-' + props.audio)
-    audio.currentTime = 0
-    audio.play()
+    const sound = new window.Howl({
+      src: ['./sfx/' + props.audio + '.wav']
+    })
+
+    sound.play()
   }
 
   birdJump () {
