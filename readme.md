@@ -2,4 +2,4 @@
 
 [Demo](https://ozgrozer.github.io/flappy/)
 
-![](screenshot.png)
+![](screenshot.png?v=2)
