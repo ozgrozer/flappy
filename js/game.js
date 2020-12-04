@@ -61,25 +61,25 @@ class Game {
   preloadSounds () {
     new window.Howl({
       preload: true,
-      src: ['./flappy/sfx/hit.wav']
+      src: ['../sfx/hit.wav']
     })
     new window.Howl({
       preload: true,
-      src: ['./flappy/sfx/point.wav']
+      src: ['../sfx/point.wav']
     })
     new window.Howl({
       preload: true,
-      src: ['./flappy/sfx/swooshing.wav']
+      src: ['../sfx/swooshing.wav']
     })
     new window.Howl({
       preload: true,
-      src: ['./flappy/sfx/wing.wav']
+      src: ['../sfx/wing.wav']
     })
   }
 
   playSound (props) {
     const sound = new window.Howl({
-      src: ['./flappy/sfx/' + props.audio + '.wav']
+      src: ['../sfx/' + props.audio + '.wav']
     })
 
     sound.play()
