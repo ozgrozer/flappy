@@ -61,19 +61,19 @@ class Game {
   preloadSounds () {
     new window.Howl({
       preload: true,
-      src: ['./sfx/hit.wav']
+      src: ['./flappy/sfx/hit.wav']
     })
     new window.Howl({
       preload: true,
-      src: ['./sfx/point.wav']
+      src: ['./flappy/sfx/point.wav']
     })
     new window.Howl({
       preload: true,
-      src: ['./sfx/swooshing.wav']
+      src: ['./flappy/sfx/swooshing.wav']
     })
     new window.Howl({
       preload: true,
-      src: ['./sfx/wing.wav']
+      src: ['./flappy/sfx/wing.wav']
     })
   }
 
