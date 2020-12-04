@@ -79,7 +79,7 @@ class Game {
 
   playSound (props) {
     const sound = new window.Howl({
-      src: ['./sfx/' + props.audio + '.wav']
+      src: ['./flappy/sfx/' + props.audio + '.wav']
     })
 
     sound.play()
